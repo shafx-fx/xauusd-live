@@ -143,7 +143,7 @@
         <span>Δ vs Jul 6 ref $4,152.90</span>
       </div>
       <div class="countdown">
-        Next auto-refresh in <span id="cd">15:00</span>
+        Next auto-refresh in <span id="cd">01:00</span>
         <button class="btn" id="btnNow">Refresh now</button>
         <span id="fetchNote"></span>
       </div>
@@ -243,7 +243,7 @@
   </div>
 
   <div class="card chart-card">
-    <h2 class="sec-title">Live session tape — builds while this page is open (15-min samples)</h2>
+    <h2 class="sec-title">Live session tape — builds while this page is open (1-min samples)</h2>
     <div class="chart-box"><canvas id="chart"></canvas></div>
   </div>
 
@@ -256,7 +256,7 @@
   </div>
 
   <div class="foot">
-    <p><b>How this page updates:</b> the price re-fetches automatically every 15 minutes while the page is open (LIVE badge = fresh; STALE = feed unreachable, last known price shown). The written analysis is a snapshot from 8 Jul 2026 — ask Claude to refresh it when the story moves.</p>
+    <p><b>How this page updates:</b> the price re-fetches automatically every minute while the page is open (LIVE badge = fresh; STALE = feed unreachable, last known price shown). The written analysis is a snapshot from 8 Jul 2026 — ask Claude to refresh it when the story moves.</p>
     <p class="srcs"><b>Sources:</b>
       <a href="https://www.npr.org/2026/07/07/g-s1-132265/tanker-attack-strait-of-hormuz" target="_blank">NPR</a>
       <a href="https://www.aljazeera.com/news/liveblog/2026/7/7/iran-war-live-khameneis-body-arrives-in-qom-hamas-cedes-gaza-governance" target="_blank">Al Jazeera</a>
@@ -278,7 +278,7 @@
   var API = "https://api.gold-api.com/price/XAU";
   var REF_PRICE = 4152.90;          // Jul 6 reference (Vantage)
   var BASELINE = { p: 4127.399902, t: Date.parse("2026-07-08T05:15:31Z") };
-  var PERIOD = 15 * 60 * 1000;      // 15 minutes
+  var PERIOD = 60 * 1000;           // 1 minute
   var HKEY = "xau_hist_v1";
   var nextAt = Date.now() + PERIOD;
   var chart = null;
@@ -292,10 +292,10 @@
     try { var h = JSON.parse(localStorage.getItem(HKEY) || "[]"); return Array.isArray(h) ? h : []; }
     catch (e) { return []; }
   }
-  function saveHist(h) { try { localStorage.setItem(HKEY, JSON.stringify(h.slice(-96))); } catch (e) {} }
+  function saveHist(h) { try { localStorage.setItem(HKEY, JSON.stringify(h.slice(-360))); } catch (e) {} }
   function pushHist(p, t) {
     var h = loadHist();
-    if (h.length && Math.abs(t - h[h.length - 1].t) < 60000) return h; // dedupe <1min
+    if (h.length && Math.abs(t - h[h.length - 1].t) < 30000) return h; // dedupe <30s
     h.push({ t: t, p: p }); saveHist(h); return h;
   }
 
