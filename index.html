@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XAUUSD Live Analysis — Geopolitics × Bond Market</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f7f5f0;
+    --card: #ffffff;
+    --ink: #1c2536;
+    --ink-2: #5a6478;
+    --line: #e4e0d6;
+    --gold: #a87f1a;
+    --gold-soft: #f5ecd7;
+    --green: #17784a;
+    --green-soft: #e3f2e9;
+    --red: #b23a2f;
+    --red-soft: #f9e7e4;
+    --amber: #9a6b00;
+    --amber-soft: #fcf3dc;
+    --blue: #2b5aa0;
+    --blue-soft: #e8eef8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--ink);
+    font-size: 14px; line-height: 1.45;
+    padding: 18px 14px 40px;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* header */
+  .top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .top h1 { font-size: 19px; letter-spacing: .3px; }
+  .top h1 span { color: var(--gold); }
+  .top .date { color: var(--ink-2); font-size: 12.5px; }
+  .badge-event { background: var(--amber-soft); color: var(--amber); border: 1px solid #e8d9ae; border-radius: 20px; padding: 3px 11px; font-size: 11.5px; font-weight: 600; }
+
+  /* hero */
+  .hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: 12px; margin-bottom: 12px; }
+  @media (max-width: 760px) { .hero { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  .price-card { display: flex; flex-direction: column; justify-content: center; }
+  .price-row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  #px { font-size: 46px; font-weight: 700; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
+  #pxDelta { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .up { color: var(--green); } .down { color: var(--red); } .flat { color: var(--ink-2); }
+  .px-meta { display: flex; gap: 10px; align-items: center; margin-top: 8px; flex-wrap: wrap; color: var(--ink-2); font-size: 12px; }
+  .src-badge { border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 700; letter-spacing: .4px; }
+  .src-live { background: var(--green-soft); color: var(--green); }
+  .src-stale { background: var(--red-soft); color: var(--red); }
+  .countdown { margin-top: 12px; display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--ink-2); }
+  #cd { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .btn { cursor: pointer; border: 1px solid var(--line); background: var(--gold-soft); color: var(--gold); font-weight: 600; border-radius: 8px; padding: 5px 12px; font-size: 12px; }
+  .btn:hover { filter: brightness(.97); }
+  #lvlRead { margin-top: 10px; font-size: 12.5px; color: var(--ink-2); }
+  #lvlRead b { color: var(--ink); }
+
+  /* verdict */
+  .verdict h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-2); margin-bottom: 10px; }
+  .chips { display: flex; flex-direction: column; gap: 8px; }
+  .chip { display: flex; justify-content: space-between; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 9px; padding: 7px 11px; font-size: 12.5px; }
+  .chip .tag { font-weight: 700; font-size: 11px; border-radius: 6px; padding: 2px 8px; white-space: nowrap; }
+  .t-bull { background: var(--green-soft); color: var(--green); }
+  .t-bear { background: var(--red-soft); color: var(--red); }
+  .t-two { background: var(--amber-soft); color: var(--amber); }
+  .net { margin-top: 10px; font-size: 13px; background: var(--gold-soft); border: 1px solid #e9dcb2; border-radius: 9px; padding: 9px 12px; }
+  .net b { color: var(--gold); }
+
+  /* panels */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
+  .panel h2 { font-size: 14px; margin-bottom: 4px; }
+  .panel .sub { color: var(--ink-2); font-size: 11.5px; margin-bottom: 12px; }
+  .geo-item { border-left: 3px solid var(--line); padding: 6px 10px; margin-bottom: 10px; }
+  .geo-item.bull { border-left-color: var(--green); }
+  .geo-item.bear { border-left-color: var(--red); }
+  .geo-item.two { border-left-color: var(--amber); }
+  .geo-item .head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .geo-item .head b { font-size: 13px; }
+  .geo-item p { color: var(--ink-2); font-size: 12.5px; margin-top: 2px; }
+  .mini-tag { font-size: 10.5px; font-weight: 700; border-radius: 5px; padding: 1px 7px; white-space: nowrap; }
+
+  table.bonds { width: 100%; border-collapse: collapse; font-size: 12.8px; }
+  table.bonds td { padding: 6.5px 4px; border-bottom: 1px solid var(--line); }
+  table.bonds td:first-child { color: var(--ink-2); }
+  table.bonds td:nth-child(2) { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.bonds td:last-child { text-align: right; }
+  .explain { margin-top: 11px; background: var(--blue-soft); border: 1px solid #d3ddef; border-radius: 9px; padding: 10px 12px; font-size: 12.3px; color: #2c3a55; }
+
+  /* levels + scenarios + chart */
+  .grid3 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 12px; margin-bottom: 12px; }
+  @media (max-width: 860px) { .grid3 { grid-template-columns: 1fr; } }
+  .lvl { width: 100%; border-collapse: collapse; font-size: 12.6px; font-variant-numeric: tabular-nums; }
+  .lvl td { padding: 5.5px 6px; border-bottom: 1px solid var(--line); }
+  .lvl .r { color: var(--red); font-weight: 700; }
+  .lvl .s { color: var(--green); font-weight: 700; }
+  .lvl tr.here { background: var(--gold-soft); outline: 1px solid #e2cf94; }
+  .lvl tr.here td:last-child::after { content: " ◀ price"; color: var(--gold); font-weight: 700; font-size: 11px; }
+  .scen { border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px; margin-bottom: 9px; font-size: 12.6px; }
+  .scen b.h { display: block; font-size: 12.8px; margin-bottom: 3px; }
+  .scen.bull b.h { color: var(--green); } .scen.bear b.h { color: var(--red); } .scen.two b.h { color: var(--amber); }
+  .scen p { color: var(--ink-2); }
+  .chart-card { margin-bottom: 12px; }
+  .chart-box { position: relative; height: 210px; }
+
+  /* calendar + footer */
+  .cal { display: flex; gap: 9px; flex-wrap: wrap; }
+  .cal .ev { border: 1px solid var(--line); border-radius: 9px; padding: 8px 12px; font-size: 12.3px; background: var(--card); flex: 1; min-width: 150px; }
+  .cal .ev b { display: block; font-size: 12.5px; }
+  .cal .ev span { color: var(--ink-2); font-size: 11.5px; }
+  .cal .ev.today { border-color: #e2cf94; background: var(--gold-soft); }
+  .foot { margin-top: 16px; color: var(--ink-2); font-size: 11.3px; }
+  .foot p { margin-bottom: 6px; }
+  .foot .srcs a { margin-right: 10px; }
+  .sec-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-2); margin: 4px 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <h1><span>XAUUSD</span> Live Analysis — Geopolitics × Bond Market</h1>
+    <span class="badge-event">⚠ FOMC June Minutes — today 14:00 ET</span>
+    <span class="date">Analysis baseline: Wed 8 Jul 2026, ~05:30 UTC</span>
+  </div>
+
+  <div class="hero">
+    <div class="card price-card">
+      <div class="price-row">
+        <span id="px">$4,127.40</span>
+        <span id="pxDelta" class="flat">—</span>
+      </div>
+      <div class="px-meta">
+        <span class="src-badge src-stale" id="srcBadge">BASELINE</span>
+        <span id="pxTime">as of 05:15 UTC (analysis snapshot)</span>
+        <span>Δ vs Jul 6 ref $4,152.90</span>
+      </div>
+      <div class="countdown">
+        Next auto-refresh in <span id="cd">15:00</span>
+        <button class="btn" id="btnNow">Refresh now</button>
+        <span id="fetchNote"></span>
+      </div>
+      <div id="lvlRead">Price is between <b>support 4,100–4,105</b> and the <b>4,135–4,145 pivot zone</b>, below MA50 (4,132.6) and MA200 (4,171.0) — sellers still control the 15-min structure.</div>
+    </div>
+
+    <div class="card verdict">
+      <h3>Intraday bias — three engines</h3>
+      <div class="chips">
+        <div class="chip"><span>Geopolitics: ceasefire "over", US strikes, Hormuz hits</span><span class="tag t-bull">BULLISH</span></div>
+        <div class="chip"><span>Bonds/Fed: 10Y 4.50%, real yield 2.26%, hike odds alive</span><span class="tag t-bear">BEARISH</span></div>
+        <div class="chip"><span>USD: DXY ~100.9, near 3-week low</span><span class="tag t-bull">MILD TAILWIND</span></div>
+      </div>
+      <div class="net"><b>Net: volatile two-way, upside skew from geopolitics.</b> Safe-haven bids on Iran headlines are being sold into while real yields sit at cycle highs. Escalation headlines can spike price into 4,160–4,200; hawkish FOMC minutes press it back to 4,100 and below.</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card panel">
+      <h2>🌍 Geopolitical tension monitor</h2>
+      <div class="sub">2026 Iran war · Strait of Hormuz crisis · updated 8 Jul 2026</div>
+
+      <div class="geo-item bull">
+        <div class="head"><b>Trump: ceasefire with Iran is "over" (Jul 8)</b><span class="mini-tag t-bull">BULLISH GOLD</span></div>
+        <p>US launched new strikes on Iran early Wednesday after three merchant ships were hit in the Strait of Hormuz. Oil jumped ~6%. Reasoning: war-risk premium returns → safe-haven demand + inflationary oil impulse.</p>
+      </div>
+
+      <div class="geo-item bull">
+        <div class="head"><b>Hormuz chokepoint under fire</b><span class="mini-tag t-bull">BULLISH GOLD</span></div>
+        <p>IRGC struck Qatari LNG tanker Al Rekayyat on day 20 of the truce; transit traffic still well below pre-war levels. Reasoning: ~20% of global oil/LNG flows at risk → energy-driven inflation hedge bid.</p>
+      </div>
+
+      <div class="geo-item two">
+        <div class="head"><b>Islamabad Memorandum in jeopardy</b><span class="mini-tag t-two">TWO-WAY RISK</span></div>
+        <p>Jun 17 US–Iran MOU set a 60-day window to negotiate a final deal. Doha talks were "going well" (Jul 1) before this week's attacks. Reasoning: any de-escalation headline unwinds the haven bid as fast as it built — both tails are live intraday.</p>
+      </div>
+
+      <div class="geo-item two">
+        <div class="head"><b>Khamenei funeral in Qom (reported)</b><span class="mini-tag t-two">UNCERTAINTY</span></div>
+        <p>Al Jazeera liveblog reports the Supreme Leader's body arrived in Qom; succession unclear. Reasoning: leadership vacuum raises miscalculation risk, but could also open the door to a deal — headline-sensitive.</p>
+      </div>
+
+      <div class="geo-item bull">
+        <div class="head"><b>Structural: central-bank buying</b><span class="mini-tag t-bull">FLOOR UNDER DIPS</span></div>
+        <p>Central banks added a net 41t in May 2026 (WGC), extending the year's trend. Reasoning: official-sector demand keeps buying dips regardless of the news cycle — it capped June's slide near 3,942.</p>
+      </div>
+    </div>
+
+    <div class="card panel">
+      <h2>🏦 Bond market &amp; Fed</h2>
+      <div class="sub">Yields as of Jul 7 close · Fed chair: Kevin Warsh</div>
+      <table class="bonds">
+        <tr><td>Fed funds target</td><td>3.50–3.75%</td><td><span class="mini-tag t-two">HOLD LIKELY JUL (~75%)</span></td></tr>
+        <tr><td>Sept rate-hike odds (CME)</td><td>~54%</td><td><span class="mini-tag t-bear">HIKE RISK LIVE</span></td></tr>
+        <tr><td>10Y Treasury</td><td>4.50%</td><td><span class="mini-tag t-bear">2-WEEK HIGH</span></td></tr>
+        <tr><td>30Y Treasury</td><td>&gt;5.00%</td><td><span class="mini-tag t-bear">ABOVE KEY 5%</span></td></tr>
+        <tr><td>10Y TIPS (real yield)</td><td>2.26%</td><td><span class="mini-tag t-bear">GOLD HEADWIND</span></td></tr>
+        <tr><td>DXY dollar index</td><td>~100.9</td><td><span class="mini-tag t-bull">NEAR 3-WK LOW</span></td></tr>
+        <tr><td>June NFP</td><td>+57K vs 115K exp</td><td><span class="mini-tag t-bull">SOFT LABOR</span></td></tr>
+      </table>
+      <div class="explain">
+        <b>Why this matters:</b> gold pays no yield, so a 2.26% real yield is its direct competitor — the historical gold/real-yield correlation is strongly negative (≈ −0.8). Yields pushed to 4.50% this week partly <i>because</i> the Hormuz oil spike revives inflation-hike risk — meaning the same geopolitical shock feeds both the bullish (haven) and bearish (yield) engines. Since 2022, central-bank buying has kept gold far above what real yields alone would imply: yields steer the intraday direction, but no longer set the floor.
+      </div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="card panel">
+      <h2>📐 Key levels</h2>
+      <div class="sub">15-min structure refs (Vantage/TradingView, FXStreet, Investing.com) — active zone highlights with live price</div>
+      <table class="lvl" id="lvlTable">
+        <tr data-min="4220" data-max="99999"><td class="r">R3</td><td>4,220</td><td>breakout extension</td></tr>
+        <tr data-min="4180" data-max="4220"><td class="r">R2</td><td>4,180–4,200</td><td>psychological 4,200 wall</td></tr>
+        <tr data-min="4160" data-max="4180"><td class="r">R1</td><td>4,160–4,171</td><td>minor res + MA200 (4,171)</td></tr>
+        <tr data-min="4135" data-max="4160"><td>PIVOT</td><td>4,135–4,145</td><td>trendline + EMA confluence, MA50 4,132.6</td></tr>
+        <tr data-min="4100" data-max="4135"><td class="s">S1</td><td>4,100–4,105</td><td>round-number shelf</td></tr>
+        <tr data-min="4075" data-max="4100"><td class="s">S2</td><td>4,075–4,080</td><td>last week's demand</td></tr>
+        <tr data-min="0" data-max="4075"><td class="s">S3</td><td>3,942</td><td>late-June swing low</td></tr>
+      </table>
+    </div>
+
+    <div class="card panel">
+      <h2>🎯 Intraday scenarios — with reasoning</h2>
+      <div class="scen bull">
+        <b class="h">Escalation + soft/dovish minutes → long bias above 4,145</b>
+        <p>Further Hormuz strikes or Iranian retaliation with minutes leaning cautious after +57K NFP: haven bid unopposed by yields. Path: reclaim 4,145 → MA200 4,171 → 4,200. Invalidation: 15-min close back under 4,135.</p>
+      </div>
+      <div class="scen bear">
+        <b class="h">Hawkish minutes + no new escalation → fade toward 4,100</b>
+        <p>Minutes stressing inflation vigilance (June's hawkish tone) with the strait calm: real-yield headwind dominates, haven premium bleeds out. Path: reject 4,135–4,145 → 4,105 → 4,075. Invalidation: hourly close above 4,171.</p>
+      </div>
+      <div class="scen two">
+        <b class="h">Both engines fire (escalation + hawkish) → violent chop</b>
+        <p>Oil-led inflation fear lifts yields and gold simultaneously — expect whipsaw between 4,100 and 4,171 with poor follow-through. Trade the extremes, not the middle; size down around 14:00 ET.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card chart-card">
+    <h2 class="sec-title">Live session tape — builds while this page is open (15-min samples)</h2>
+    <div class="chart-box"><canvas id="chart"></canvas></div>
+  </div>
+
+  <div class="sec-title">Catalyst calendar</div>
+  <div class="cal">
+    <div class="ev today"><b>Jul 8 — FOMC June minutes</b><span>14:00 ET · detail behind the hawkish hold</span></div>
+    <div class="ev"><b>Jul 9 — Initial jobless claims</b><span>Labor momentum after weak NFP</span></div>
+    <div class="ev"><b>Jul 14 — US CPI (June)</b><span>Key input for Sept hike pricing</span></div>
+    <div class="ev"><b>Rolling — Hormuz headlines</b><span>Strikes / talks: instant repricing</span></div>
+  </div>
+
+  <div class="foot">
+    <p><b>How this page updates:</b> the price re-fetches automatically every 15 minutes while the page is open (LIVE badge = fresh; STALE = feed unreachable, last known price shown). The written analysis is a snapshot from 8 Jul 2026 — ask Claude to refresh it when the story moves.</p>
+    <p class="srcs"><b>Sources:</b>
+      <a href="https://www.npr.org/2026/07/07/g-s1-132265/tanker-attack-strait-of-hormuz" target="_blank">NPR</a>
+      <a href="https://www.aljazeera.com/news/liveblog/2026/7/7/iran-war-live-khameneis-body-arrives-in-qom-hamas-cedes-gaza-governance" target="_blank">Al Jazeera</a>
+      <a href="https://tradingeconomics.com/united-states/government-bond-yield" target="_blank">TradingEconomics</a>
+      <a href="https://www.cnbc.com/amp/2026/07/07/us-treasury-yields-investors-await-trade-deficit-data-.html" target="_blank">CNBC</a>
+      <a href="https://www.vantagemarkets.com/market-analysis/xauusd-gold-price-analysis-july-6-2026/" target="_blank">Vantage</a>
+      <a href="https://www.litefinance.org/blog/analysts-opinions/gold-price-prediction-forecast/daily-and-weekly/" target="_blank">LiteFinance</a>
+      <a href="https://tradingeconomics.com/united-states/10-year-tips-yield" target="_blank">10Y TIPS</a>
+      <a href="https://www.gold.org/goldhub/gold-focus/2026/07/central-bank-gold-statistics-central-banks-remain-committed-gold" target="_blank">WGC</a>
+      <a href="https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis" target="_blank">Hormuz crisis</a>
+      <a href="https://gold-api.com" target="_blank">gold-api.com (live feed)</a>
+    </p>
+    <p>Educational analysis, not financial advice. Figures as reported by cited sources; verify before trading.</p>
+  </div>
+
+<script>
+(function () {
+  "use strict";
+  var API = "https://api.gold-api.com/price/XAU";
+  var REF_PRICE = 4152.90;          // Jul 6 reference (Vantage)
+  var BASELINE = { p: 4127.399902, t: Date.parse("2026-07-08T05:15:31Z") };
+  var PERIOD = 15 * 60 * 1000;      // 15 minutes
+  var HKEY = "xau_hist_v1";
+  var nextAt = Date.now() + PERIOD;
+  var chart = null;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt = function (n) { return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+  var hhmm = function (ms) { var d = new Date(ms); return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0"); };
+
+  /* ---------- history (localStorage, survives reloads) ---------- */
+  function loadHist() {
+    try { var h = JSON.parse(localStorage.getItem(HKEY) || "[]"); return Array.isArray(h) ? h : []; }
+    catch (e) { return []; }
+  }
+  function saveHist(h) { try { localStorage.setItem(HKEY, JSON.stringify(h.slice(-96))); } catch (e) {} }
+  function pushHist(p, t) {
+    var h = loadHist();
+    if (h.length && Math.abs(t - h[h.length - 1].t) < 60000) return h; // dedupe <1min
+    h.push({ t: t, p: p }); saveHist(h); return h;
+  }
+
+  /* ---------- price extraction ---------- */
+  function parsePriceJson(obj) {
+    if (obj && typeof obj.price === "number" && obj.price > 100 && obj.price < 100000) {
+      return { p: obj.price, t: obj.updatedAt ? Date.parse(obj.updatedAt) : Date.now() };
+    }
+    return null;
+  }
+  function extractFromText(text) {
+    var m = text.match(/\{[^{}]*"price"\s*:\s*[\d.]+[^{}]*\}/);
+    if (!m) return null;
+    try { return parsePriceJson(JSON.parse(m[0])); } catch (e) { return null; }
+  }
+
+  /* ---------- fetch cascade: cowork MCP -> proxy -> direct ---------- */
+  function viaCowork() {
+    if (!(window.cowork && typeof window.cowork.callMcpTool === "function")) return Promise.reject("no-cowork");
+    return window.cowork.callMcpTool("mcp__workspace__web_fetch", { url: API }).then(function (r) {
+      if (r && r.isError) throw "mcp-error";
+      var sc = r && r.structuredContent ? parsePriceJson(r.structuredContent) : null;
+      if (sc) return sc;
+      var txt = "";
+      if (r && Array.isArray(r.content)) r.content.forEach(function (c) { if (c && c.text) txt += c.text + "\n"; });
+      var got = extractFromText(txt);
+      if (!got) throw "mcp-parse";
+      return got;
+    });
+  }
+  function fetchJson(u) {
+    var ctl = new AbortController();
+    var kill = setTimeout(function () { ctl.abort(); }, 12000);
+    return fetch(u, { signal: ctl.signal, cache: "no-store" }).then(function (r) {
+      clearTimeout(kill);
+      if (!r.ok) throw "http-" + r.status;
+      return r.json();
+    }).then(function (j) {
+      var got = parsePriceJson(j);
+      if (!got) throw "bad-json";
+      return got;
+    });
+  }
+  function viaProxy() { // Supabase edge function proxies the gold API (CORS open)
+    return fetchJson("https://gksbairddxvcysaztiut.supabase.co/functions/v1/xauusd?price=1");
+  }
+  function viaFetch() { return fetchJson(API); }
+  function getPrice() {
+    return viaCowork()
+      .catch(function () { return viaProxy(); })
+      .catch(function () { return viaFetch(); });
+  }
+
+  /* ---------- UI updates ---------- */
+  function setDelta(p) {
+    var d = p - REF_PRICE, pc = (d / REF_PRICE) * 100, el = $("pxDelta");
+    el.textContent = (d >= 0 ? "▲ +" : "▼ ") + d.toFixed(2) + " (" + (d >= 0 ? "+" : "") + pc.toFixed(2) + "%)";
+    el.className = d > 0.5 ? "up" : d < -0.5 ? "down" : "flat";
+  }
+  function setLevels(p) {
+    var rows = document.querySelectorAll("#lvlTable tr"), msg = "";
+    rows.forEach(function (r) {
+      var lo = parseFloat(r.dataset.min), hi = parseFloat(r.dataset.max);
+      var here = p >= lo && p < hi;
+      r.classList.toggle("here", here);
+      if (here) msg = r.cells[1].textContent + " (" + r.cells[2].textContent + ")";
+    });
+    var side = p < 4135 ? "below MA50 (4,132.6) and MA200 (4,171.0) — sellers still control the 15-min structure"
+             : p < 4171 ? "above the pivot but below MA200 (4,171.0) — contested tape"
+             : "above MA200 (4,171.0) — buyers control the 15-min structure";
+    $("lvlRead").innerHTML = "Live read: price in zone <b>" + msg + "</b>, " + side + ".";
+  }
+  function setBadge(live, when, note) {
+    var b = $("srcBadge");
+    b.textContent = live ? "LIVE" : "STALE";
+    b.className = "src-badge " + (live ? "src-live" : "src-stale");
+    $("pxTime").textContent = "updated " + hhmm(when) + " local";
+    $("fetchNote").textContent = note || "";
+  }
+
+  /* ---------- chart ---------- */
+  function drawChart(hist) {
+    if (typeof Chart === "undefined") return;
+    var labels = hist.map(function (x) { return hhmm(x.t); });
+    var data = hist.map(function (x) { return x.p; });
+    if (chart) { chart.data.labels = labels; chart.data.datasets[0].data = data; chart.update("none"); return; }
+    chart = new Chart($("chart"), {
+      type: "line",
+      data: { labels: labels, datasets: [{
+        label: "XAUUSD", data: data, borderColor: "#a87f1a",
+        backgroundColor: "rgba(168,127,26,.08)", fill: true,
+        tension: .25, pointRadius: 2.5, pointBackgroundColor: "#a87f1a", borderWidth: 2
+      }]},
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: "#eee9dd" }, ticks: { color: "#5a6478", maxTicksLimit: 10 } },
+          y: { grid: { color: "#eee9dd" }, ticks: { color: "#5a6478",
+               callback: function (v) { return "$" + v.toLocaleString(); } } }
+        }
+      }
+    });
+  }
+
+  /* ---------- refresh loop ---------- */
+  var busy = false;
+  function refresh(manual) {
+    if (busy) return;
+    busy = true;
+    nextAt = Date.now() + PERIOD;
+    $("fetchNote").textContent = "fetching…";
+    getPrice().then(function (got) {
+      $("px").textContent = fmt(got.p);
+      setDelta(got.p); setLevels(got.p);
+      setBadge(true, got.t || Date.now());
+      drawChart(pushHist(got.p, got.t || Date.now()));
+    }).catch(function (e) {
+      setBadge(false, Date.now(), "feed unreachable — showing last known");
+    }).finally(function () {
+      busy = false;
+      nextAt = Date.now() + PERIOD;
+    });
+  }
+  function tick() {
+    var left = Math.max(0, nextAt - Date.now());
+    var m = Math.floor(left / 60000), s = Math.floor((left % 60000) / 1000);
+    $("cd").textContent = String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    if (left <= 0) refresh(false);
+  }
+
+  /* ---------- boot ---------- */
+  var hist = loadHist();
+  if (!hist.length) hist = pushHist(BASELINE.p, BASELINE.t);
+  setDelta(BASELINE.p); setLevels(BASELINE.p); drawChart(hist);
+  $("btnNow").addEventListener("click", function () { refresh(true); });
+  setInterval(tick, 1000);
+  refresh(false); // fetch immediately on open
+})();
+</script>
+</div>
+</body>
+</html>
