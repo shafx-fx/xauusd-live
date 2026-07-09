@@ -94,6 +94,12 @@
   table.bonds td:last-child { text-align: right; }
   .explain { margin-top: 11px; background: var(--blue-soft); border: 1px solid #d3ddef; border-radius: 9px; padding: 10px 12px; font-size: 12.3px; color: #2c3a55; }
 
+  table.fomc { width: 100%; border-collapse: collapse; font-size: 12.6px; }
+  table.fomc td { padding: 7px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.fomc td:first-child { font-weight: 700; white-space: nowrap; padding-right: 12px; }
+  table.fomc td:nth-child(2) { color: var(--ink-2); }
+  table.fomc td:last-child { text-align: right; white-space: nowrap; }
+
   /* levels + scenarios + chart */
   .grid3 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 12px; margin-bottom: 12px; }
   @media (max-width: 860px) { .grid3 { grid-template-columns: 1fr; } }
@@ -127,7 +133,7 @@
 
   <div class="top">
     <h1><span>XAUUSD</span> Live Analysis — Geopolitics × Bond Market</h1>
-    <span class="badge-event">⚠ FOMC June Minutes — today 14:00 ET</span>
+    <span class="badge-event">⚠ FOMC minutes out: 9 of 18 dots project a 2026 hike</span>
     <span class="date">Analysis baseline: Wed 8 Jul 2026, ~05:30 UTC</span>
   </div>
 
@@ -210,6 +216,19 @@
     </div>
   </div>
 
+  <div class="card panel" style="margin-bottom: 12px;">
+    <h2>🏛 FOMC June minutes — key points &amp; gold impact</h2>
+    <div class="sub">Released Jul 8, 14:00 ET · statement cut to 130 words, no forward guidance · Chair Warsh sat out the dot plot</div>
+    <table class="fomc">
+      <tr><td>Unanimous hold</td><td>Funds rate kept at 3.50–3.75%, where it has sat all of 2026.</td><td><span class="mini-tag t-two">NEUTRAL</span></td></tr>
+      <tr><td>9 hawkish dots</td><td>Nine of eighteen participants project at least one hike before year-end; eight see no change; one a cut. Hike risk is live, not priced out.</td><td><span class="mini-tag t-bear">BEARISH GOLD</span></td></tr>
+      <tr><td>Upside inflation risk</td><td>Inflation seen elevated near-term on tariffs, energy and Hormuz-closure supply disruption — named the committee's core conflict.</td><td><span class="mini-tag t-two">TWO-WAY</span></td></tr>
+      <tr><td>AI price pressure</td><td>Strong AI-infrastructure demand expected to keep upward pressure on tech and electricity prices — stickier inflation, higher-for-longer real yields.</td><td><span class="mini-tag t-bear">BEARISH GOLD</span></td></tr>
+      <tr><td>No forward guidance</td><td>Deliberately brief statement and a neutral wait-and-see stance leave every meeting live — headline sensitivity rises.</td><td><span class="mini-tag t-two">VOLATILITY</span></td></tr>
+      <tr><td>Market verdict (Jul 8)</td><td>Gold broke 4,100 and the 4,075–4,080 shelf within hours of release — the hawkish read won the session.</td><td><span class="mini-tag t-bear">BEARISH CONFIRMED</span></td></tr>
+    </table>
+  </div>
+
   <div class="grid3">
     <div class="card panel">
       <h2>📐 Key levels</h2>
@@ -249,7 +268,7 @@
 
   <div class="sec-title">Catalyst calendar</div>
   <div class="cal">
-    <div class="ev today"><b>Jul 8 — FOMC June minutes</b><span>14:00 ET · detail behind the hawkish hold</span></div>
+    <div class="ev today"><b>Jul 8 — FOMC minutes ✓ released</b><span>Hawkish split — see key-points table above</span></div>
     <div class="ev"><b>Jul 9 — Initial jobless claims</b><span>Labor momentum after weak NFP</span></div>
     <div class="ev"><b>Jul 14 — US CPI (June)</b><span>Key input for Sept hike pricing</span></div>
     <div class="ev"><b>Rolling — Hormuz headlines</b><span>Strikes / talks: instant repricing</span></div>
@@ -262,6 +281,7 @@
       <a href="https://www.aljazeera.com/news/liveblog/2026/7/7/iran-war-live-khameneis-body-arrives-in-qom-hamas-cedes-gaza-governance" target="_blank">Al Jazeera</a>
       <a href="https://tradingeconomics.com/united-states/government-bond-yield" target="_blank">TradingEconomics</a>
       <a href="https://www.cnbc.com/amp/2026/07/07/us-treasury-yields-investors-await-trade-deficit-data-.html" target="_blank">CNBC</a>
+      <a href="https://www.cnbc.com/2026/07/08/fed-minutes-june-2026-.html" target="_blank">Fed minutes</a>
       <a href="https://www.vantagemarkets.com/market-analysis/xauusd-gold-price-analysis-july-6-2026/" target="_blank">Vantage</a>
       <a href="https://www.litefinance.org/blog/analysts-opinions/gold-price-prediction-forecast/daily-and-weekly/" target="_blank">LiteFinance</a>
       <a href="https://tradingeconomics.com/united-states/10-year-tips-yield" target="_blank">10Y TIPS</a>
