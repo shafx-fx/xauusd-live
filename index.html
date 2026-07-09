@@ -28,19 +28,19 @@
   body {
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background: var(--bg); color: var(--ink);
-    font-size: 14px; line-height: 1.45;
-    padding: 18px 14px 40px;
+    font-size: 15.5px; line-height: 1.52; font-weight: 500;
+    padding: 18px 18px 44px;
   }
-  .wrap { max-width: 1060px; margin: 0 auto; }
+  .wrap { max-width: 1560px; margin: 0 auto; }
   a { color: var(--blue); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
   /* header */
   .top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-  .top h1 { font-size: 19px; letter-spacing: .3px; }
+  .top h1 { font-size: 23px; letter-spacing: .3px; font-weight: 800; }
   .top h1 span { color: var(--gold); }
-  .top .date { color: var(--ink-2); font-size: 12.5px; }
-  .badge-event { background: var(--amber-soft); color: var(--amber); border: 1px solid #e8d9ae; border-radius: 20px; padding: 3px 11px; font-size: 11.5px; font-weight: 600; }
+  .top .date { color: var(--ink-2); font-size: 13.5px; }
+  .badge-event { background: var(--amber-soft); color: var(--amber); border: 1px solid #e8d9ae; border-radius: 20px; padding: 4px 13px; font-size: 13px; font-weight: 700; }
 
   /* hero */
   .hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: 12px; margin-bottom: 12px; }
@@ -48,53 +48,57 @@
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
   .price-card { display: flex; flex-direction: column; justify-content: center; }
   .price-row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-  #px { font-size: 46px; font-weight: 700; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
-  #pxDelta { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  #px { font-size: 68px; font-weight: 800; letter-spacing: -1.5px; font-variant-numeric: tabular-nums; }
+  #pxDelta { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
   .up { color: var(--green); } .down { color: var(--red); } .flat { color: var(--ink-2); }
-  .px-meta { display: flex; gap: 10px; align-items: center; margin-top: 8px; flex-wrap: wrap; color: var(--ink-2); font-size: 12px; }
-  .src-badge { border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 700; letter-spacing: .4px; }
+  @keyframes flashUp { 0% { color: var(--green); } 100% { color: var(--ink); } }
+  @keyframes flashDown { 0% { color: var(--red); } 100% { color: var(--ink); } }
+  #px.flash-up { animation: flashUp 1.2s ease-out; }
+  #px.flash-down { animation: flashDown 1.2s ease-out; }
+  .px-meta { display: flex; gap: 10px; align-items: center; margin-top: 8px; flex-wrap: wrap; color: var(--ink-2); font-size: 13.2px; }
+  .src-badge { border-radius: 20px; padding: 3px 12px; font-size: 12.2px; font-weight: 800; letter-spacing: .4px; }
   .src-live { background: var(--green-soft); color: var(--green); }
   .src-stale { background: var(--red-soft); color: var(--red); }
-  .countdown { margin-top: 12px; display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--ink-2); }
-  #cd { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .btn { cursor: pointer; border: 1px solid var(--line); background: var(--gold-soft); color: var(--gold); font-weight: 600; border-radius: 8px; padding: 5px 12px; font-size: 12px; }
+  .countdown { margin-top: 12px; display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--ink-2); }
+  #cd { font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .btn { cursor: pointer; border: 1px solid var(--line); background: var(--gold-soft); color: var(--gold); font-weight: 700; border-radius: 8px; padding: 6px 14px; font-size: 13px; }
   .btn:hover { filter: brightness(.97); }
-  #lvlRead { margin-top: 10px; font-size: 12.5px; color: var(--ink-2); }
+  #lvlRead { margin-top: 10px; font-size: 13.8px; color: var(--ink-2); }
   #lvlRead b { color: var(--ink); }
 
   /* verdict */
-  .verdict h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-2); margin-bottom: 10px; }
+  .verdict h3 { font-size: 13.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-2); margin-bottom: 10px; font-weight: 800; }
   .chips { display: flex; flex-direction: column; gap: 8px; }
-  .chip { display: flex; justify-content: space-between; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 9px; padding: 7px 11px; font-size: 12.5px; }
-  .chip .tag { font-weight: 700; font-size: 11px; border-radius: 6px; padding: 2px 8px; white-space: nowrap; }
+  .chip { display: flex; justify-content: space-between; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 9px; padding: 8px 12px; font-size: 13.8px; }
+  .chip .tag { font-weight: 800; font-size: 12px; border-radius: 6px; padding: 3px 9px; white-space: nowrap; }
   .t-bull { background: var(--green-soft); color: var(--green); }
   .t-bear { background: var(--red-soft); color: var(--red); }
   .t-two { background: var(--amber-soft); color: var(--amber); }
-  .net { margin-top: 10px; font-size: 13px; background: var(--gold-soft); border: 1px solid #e9dcb2; border-radius: 9px; padding: 9px 12px; }
+  .net { margin-top: 10px; font-size: 14.8px; background: var(--gold-soft); border: 1px solid #e9dcb2; border-radius: 9px; padding: 10px 13px; }
   .net b { color: var(--gold); }
 
   /* panels */
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
   @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
-  .panel h2 { font-size: 14px; margin-bottom: 4px; }
-  .panel .sub { color: var(--ink-2); font-size: 11.5px; margin-bottom: 12px; }
+  .panel h2 { font-size: 17px; margin-bottom: 4px; font-weight: 800; }
+  .panel .sub { color: var(--ink-2); font-size: 13px; margin-bottom: 12px; }
   .geo-item { border-left: 3px solid var(--line); padding: 6px 10px; margin-bottom: 10px; }
   .geo-item.bull { border-left-color: var(--green); }
   .geo-item.bear { border-left-color: var(--red); }
   .geo-item.two { border-left-color: var(--amber); }
   .geo-item .head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
-  .geo-item .head b { font-size: 13px; }
-  .geo-item p { color: var(--ink-2); font-size: 12.5px; margin-top: 2px; }
-  .mini-tag { font-size: 10.5px; font-weight: 700; border-radius: 5px; padding: 1px 7px; white-space: nowrap; }
+  .geo-item .head b { font-size: 14.5px; }
+  .geo-item p { color: var(--ink-2); font-size: 13.8px; margin-top: 3px; }
+  .mini-tag { font-size: 11.8px; font-weight: 800; border-radius: 5px; padding: 2px 8px; white-space: nowrap; }
 
-  table.bonds { width: 100%; border-collapse: collapse; font-size: 12.8px; }
+  table.bonds { width: 100%; border-collapse: collapse; font-size: 14.2px; }
   table.bonds td { padding: 6.5px 4px; border-bottom: 1px solid var(--line); }
   table.bonds td:first-child { color: var(--ink-2); }
   table.bonds td:nth-child(2) { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
   table.bonds td:last-child { text-align: right; }
-  .explain { margin-top: 11px; background: var(--blue-soft); border: 1px solid #d3ddef; border-radius: 9px; padding: 10px 12px; font-size: 12.3px; color: #2c3a55; }
+  .explain { margin-top: 11px; background: var(--blue-soft); border: 1px solid #d3ddef; border-radius: 9px; padding: 11px 13px; font-size: 13.6px; color: #2c3a55; }
 
-  table.fomc { width: 100%; border-collapse: collapse; font-size: 12.6px; }
+  table.fomc { width: 100%; border-collapse: collapse; font-size: 14.2px; }
   table.fomc td { padding: 7px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
   table.fomc td:first-child { font-weight: 700; white-space: nowrap; padding-right: 12px; }
   table.fomc td:nth-child(2) { color: var(--ink-2); }
@@ -103,14 +107,14 @@
   /* levels + scenarios + chart */
   .grid3 { display: grid; grid-template-columns: .9fr 1.1fr; gap: 12px; margin-bottom: 12px; }
   @media (max-width: 860px) { .grid3 { grid-template-columns: 1fr; } }
-  .lvl { width: 100%; border-collapse: collapse; font-size: 12.6px; font-variant-numeric: tabular-nums; }
+  .lvl { width: 100%; border-collapse: collapse; font-size: 14.2px; font-variant-numeric: tabular-nums; }
   .lvl td { padding: 5.5px 6px; border-bottom: 1px solid var(--line); }
   .lvl .r { color: var(--red); font-weight: 700; }
   .lvl .s { color: var(--green); font-weight: 700; }
   .lvl tr.here { background: var(--gold-soft); outline: 1px solid #e2cf94; }
   .lvl tr.here td:last-child::after { content: " ◀ price"; color: var(--gold); font-weight: 700; font-size: 11px; }
-  .scen { border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px; margin-bottom: 9px; font-size: 12.6px; }
-  .scen b.h { display: block; font-size: 12.8px; margin-bottom: 3px; }
+  .scen { border: 1px solid var(--line); border-radius: 9px; padding: 11px 13px; margin-bottom: 9px; font-size: 13.8px; }
+  .scen b.h { display: block; font-size: 14.5px; margin-bottom: 3px; }
   .scen.bull b.h { color: var(--green); } .scen.bear b.h { color: var(--red); } .scen.two b.h { color: var(--amber); }
   .scen p { color: var(--ink-2); }
   .chart-card { margin-bottom: 12px; }
@@ -118,14 +122,14 @@
 
   /* calendar + footer */
   .cal { display: flex; gap: 9px; flex-wrap: wrap; }
-  .cal .ev { border: 1px solid var(--line); border-radius: 9px; padding: 8px 12px; font-size: 12.3px; background: var(--card); flex: 1; min-width: 150px; }
-  .cal .ev b { display: block; font-size: 12.5px; }
-  .cal .ev span { color: var(--ink-2); font-size: 11.5px; }
+  .cal .ev { border: 1px solid var(--line); border-radius: 9px; padding: 9px 13px; font-size: 13.4px; background: var(--card); flex: 1; min-width: 170px; }
+  .cal .ev b { display: block; font-size: 13.8px; }
+  .cal .ev span { color: var(--ink-2); font-size: 12.6px; }
   .cal .ev.today { border-color: #e2cf94; background: var(--gold-soft); }
-  .foot { margin-top: 16px; color: var(--ink-2); font-size: 11.3px; }
+  .foot { margin-top: 18px; color: var(--ink-2); font-size: 12.4px; }
   .foot p { margin-bottom: 6px; }
   .foot .srcs a { margin-right: 10px; }
-  .sec-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-2); margin: 4px 0 8px; }
+  .sec-title { font-size: 13.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-2); margin: 4px 0 8px; font-weight: 800; }
 </style>
 </head>
 <body>
@@ -149,7 +153,7 @@
         <span>Δ vs Jul 6 ref $4,152.90</span>
       </div>
       <div class="countdown">
-        Next auto-refresh in <span id="cd">01:00</span>
+        Next auto-refresh in <span id="cd">00:15</span>
         <button class="btn" id="btnNow">Refresh now</button>
         <span id="fetchNote"></span>
       </div>
@@ -289,7 +293,7 @@
   </div>
 
   <div class="foot">
-    <p><b>How this page updates:</b> the price re-fetches automatically every minute while the page is open (LIVE badge = fresh; STALE = feed unreachable, last known price shown). The written analysis is a snapshot from 9 Jul 2026 — ask Claude to refresh it when the story moves.</p>
+    <p><b>How this page updates:</b> the price re-fetches automatically every 15 seconds while the page is open, flashing green/red on real ticks; the chart stores one sample per minute (LIVE badge = fresh; STALE = feed unreachable, last known price shown). The written analysis is a snapshot from 9 Jul 2026 — ask Claude to refresh it when the story moves.</p>
     <p class="srcs"><b>Sources:</b>
       <a href="https://www.npr.org/2026/07/07/g-s1-132265/tanker-attack-strait-of-hormuz" target="_blank">NPR</a>
       <a href="https://www.aljazeera.com/news/liveblog/2026/7/7/iran-war-live-khameneis-body-arrives-in-qom-hamas-cedes-gaza-governance" target="_blank">Al Jazeera</a>
@@ -312,7 +316,7 @@
   var API = "https://api.gold-api.com/price/XAU";
   var REF_PRICE = 4152.90;          // Jul 6 reference (Vantage)
   var BASELINE = { p: 4127.399902, t: Date.parse("2026-07-08T05:15:31Z") };
-  var PERIOD = 60 * 1000;           // 1 minute
+  var PERIOD = 15 * 1000;           // 15 seconds
   var HKEY = "xau_hist_v1";
   var nextAt = Date.now() + PERIOD;
   var chart = null;
@@ -329,7 +333,7 @@
   function saveHist(h) { try { localStorage.setItem(HKEY, JSON.stringify(h.slice(-360))); } catch (e) {} }
   function pushHist(p, t) {
     var h = loadHist();
-    if (h.length && Math.abs(t - h[h.length - 1].t) < 30000) return h; // dedupe <30s
+    if (h.length && Math.abs(t - h[h.length - 1].t) < 55000) return h; // chart keeps ~1 sample/min
     h.push({ t: t, p: p }); saveHist(h); return h;
   }
 
@@ -443,7 +447,14 @@
     nextAt = Date.now() + PERIOD;
     $("fetchNote").textContent = "fetching…";
     getPrice().then(function (got) {
-      $("px").textContent = fmt(got.p);
+      var el = $("px");
+      var prev = parseFloat((el.textContent || "").replace(/[$,]/g, ""));
+      el.textContent = fmt(got.p);
+      if (!isNaN(prev) && got.p !== prev) {
+        el.classList.remove("flash-up", "flash-down");
+        void el.offsetWidth; // restart animation
+        el.classList.add(got.p > prev ? "flash-up" : "flash-down");
+      }
       setDelta(got.p); setLevels(got.p);
       setBadge(true, got.t || Date.now());
       drawChart(pushHist(got.p, got.t || Date.now()));
