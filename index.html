@@ -43,7 +43,8 @@
   .badge-event { background: var(--amber-soft); color: var(--amber); border: 1px solid #e8d9ae; border-radius: 20px; padding: 4px 13px; font-size: 13px; font-weight: 700; }
 
   /* hero */
-  .hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .hero { display: grid; grid-template-columns: 1.1fr 1fr 0.95fr; gap: 12px; margin-bottom: 12px; }
+  @media (max-width: 1100px) { .hero { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 760px) { .hero { grid-template-columns: 1fr; } }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
   .price-card { display: flex; flex-direction: column; justify-content: center; }
@@ -138,7 +139,7 @@
   <div class="top">
     <h1><span>XAUUSD</span> Live Analysis — Geopolitics × Bond Market</h1>
     <span class="badge-event">⚠ FOMC minutes out: 9 of 18 dots project a 2026 hike</span>
-    <span class="date">Analysis: Thu 9 Jul 2026 · regime-calibrated</span>
+    <span class="date">Analysis: Fri 10 Jul 2026 · regime-calibrated</span>
     <a class="btn" href="https://shafx-fx.github.io/xauusd-live/xauusd_report.pdf" target="_blank" style="text-decoration: none;">⬇ PDF report</a>
   </div>
 
@@ -165,10 +166,21 @@
       <h3>Intraday bias — three engines</h3>
       <div class="chips">
         <div class="chip"><span>War news → oil → hike odds → yields: haven bid failing</span><span class="tag t-bear">BEARISH NOW</span></div>
-        <div class="chip"><span>Bonds/Fed: 10Y 4.47%, real yield ~2.26%, Sept hike ~50–55%</span><span class="tag t-bear">BEARISH</span></div>
+        <div class="chip"><span>Bonds/Fed: 10Y 4.54% easing, real yield ~2.26%, Sept hike ~50–55%</span><span class="tag t-bear">BEARISH, FADING</span></div>
         <div class="chip"><span>USD: DXY ~100.9, near 3-week low</span><span class="tag t-bull">MILD TAILWIND</span></div>
       </div>
       <div class="net"><b>Net: gold is trading as a rates asset, not a fear asset.</b> War headlines currently price as inflation/hike-odds events — gold made its low (~4,030) on the day the ceasefire died. Fade escalation-driven pops into 4,135–4,145; de-escalation is, counterintuitively, the bullish headline. Regime monitor below.</div>
+    </div>
+
+    <div class="card verdict">
+      <h3>⚡ Today's movers — Fri 10 Jul</h3>
+      <div class="chips">
+        <div class="chip"><span><b>Jul 10</b> · 10Y eases to 4.54% as oil retreats — 2nd day down</span><span class="tag t-bull">GOLD TAILWIND</span></div>
+        <div class="chip"><span><b>Jul 10</b> · Khamenei buried in Mashhad — succession phase begins</span><span class="tag t-two">UNCERTAINTY</span></div>
+        <div class="chip"><span><b>Jul 10</b> · Israel warns of reported Iran plot against Trump</span><span class="tag t-two">HEADLINE RISK</span></div>
+        <div class="chip"><span><b>Jul 9</b> · US hits Iran ~170 times in 2 days; Gulf ports struck</span><span class="tag t-two">TWO-WAY</span></div>
+        <div class="chip"><span><b>Jul 9</b> · Jobless claims 215K vs 218K exp — labor steady</span><span class="tag t-bear">MILD BEARISH</span></div>
+      </div>
     </div>
   </div>
 
@@ -188,7 +200,7 @@
   <div class="grid2">
     <div class="card panel">
       <h2>🌍 Geopolitical tension monitor</h2>
-      <div class="sub">2026 Iran war · Strait of Hormuz crisis · updated 9 Jul 2026 · tags reflect current regime · every item is date-stamped</div>
+      <div class="sub">2026 Iran war · Strait of Hormuz crisis · updated 10 Jul 2026 · tags reflect current regime · every item is date-stamped</div>
 
       <div class="geo-item bull">
         <div class="head"><b>Jul 8, early hrs ET · Trump: ceasefire with Iran is "over"</b><span class="mini-tag t-bear">BEARISH VIA YIELDS</span></div>
@@ -218,11 +230,11 @@
 
     <div class="card panel">
       <h2>🏦 Bond market &amp; Fed</h2>
-      <div class="sub">Yields as of Jul 8–9 · Fed chair: Kevin Warsh</div>
+      <div class="sub">Yields as of Fri 10 Jul · Fed chair: Kevin Warsh</div>
       <table class="bonds">
         <tr><td>Fed funds target</td><td>3.50–3.75%</td><td><span class="mini-tag t-two">HOLD LIKELY JUL (~75%)</span></td></tr>
         <tr><td>Sept rate-hike odds (CME)</td><td>~50–55%</td><td><span class="mini-tag t-bear">HIKE RISK LIVE</span></td></tr>
-        <tr><td>10Y Treasury</td><td>4.47%</td><td><span class="mini-tag t-two">STABILIZING</span></td></tr>
+        <tr><td>10Y Treasury</td><td>4.54%</td><td><span class="mini-tag t-two">EASING, 2ND DAY</span></td></tr>
         <tr><td>2Y Treasury</td><td>4.11%</td><td><span class="mini-tag t-two">POLICY-SENSITIVE</span></td></tr>
         <tr><td>30Y Treasury</td><td>&gt;5.00%</td><td><span class="mini-tag t-bear">ABOVE KEY 5%</span></td></tr>
         <tr><td>10Y TIPS (real yield)</td><td>2.26%</td><td><span class="mini-tag t-bear">GOLD HEADWIND</span></td></tr>
@@ -304,13 +316,13 @@
   <div class="sec-title">Catalyst calendar</div>
   <div class="cal">
     <div class="ev today"><b>Jul 8 — FOMC minutes ✓ released</b><span>Hawkish split — see key-points table above</span></div>
-    <div class="ev"><b>Jul 9 — Initial jobless claims</b><span>Labor momentum after weak NFP</span></div>
+    <div class="ev"><b>Jul 9 — Jobless claims ✓ 215K</b><span>vs 218K exp — labor steady, no dovish push</span></div>
     <div class="ev"><b>Jul 14 — US CPI (June)</b><span>Key input for Sept hike pricing</span></div>
     <div class="ev"><b>Rolling — Hormuz headlines</b><span>Strikes / talks: instant repricing</span></div>
   </div>
 
   <div class="foot">
-    <p><b>How this page updates:</b> the price re-fetches automatically every 15 seconds while the page is open, flashing green/red on real ticks; the chart stores one sample per minute (LIVE badge = fresh; STALE = feed unreachable, last known price shown). The written analysis is a snapshot from 9 Jul 2026 — ask Claude to refresh it when the story moves.</p>
+    <p><b>How this page updates:</b> the price re-fetches automatically every 15 seconds while the page is open, flashing green/red on real ticks; the chart stores one sample per minute (LIVE badge = fresh; STALE = feed unreachable, last known price shown). The written analysis is a snapshot from 10 Jul 2026 — ask Claude to refresh it when the story moves.</p>
     <p class="srcs"><b>Sources:</b>
       <a href="https://www.npr.org/2026/07/07/g-s1-132265/tanker-attack-strait-of-hormuz" target="_blank">NPR</a>
       <a href="https://www.aljazeera.com/news/liveblog/2026/7/7/iran-war-live-khameneis-body-arrives-in-qom-hamas-cedes-gaza-governance" target="_blank">Al Jazeera</a>
