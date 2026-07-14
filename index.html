@@ -66,7 +66,6 @@
   .btn:hover { filter: brightness(.97); }
   #lvlRead { margin-top: 10px; font-size: 13.8px; color: var(--ink-2); }
   #lvlRead b { color: var(--ink); }
-  #flipAlarm { display: none; margin-top: 10px; background: var(--amber-soft); border: 1px solid #e8d9ae; border-radius: 9px; padding: 9px 12px; font-size: 13.5px; color: var(--amber); font-weight: 700; }
 
   /* verdict */
   .verdict h3 { font-size: 13.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-2); margin-bottom: 10px; font-weight: 800; }
@@ -139,7 +138,7 @@
 
   <div class="top">
     <h1><span>XAUUSD</span> Live Analysis — Geopolitics × Bond Market</h1>
-    <span class="badge-event">⚠ June CPI today 8:30 ET — exp. 3.9% y/y from 4.2%</span>
+    <span class="badge-event">⚠ Jun CPI cools to 3.5% vs 3.8% exp — Jul hike odds collapse 42%→17%</span>
     <span class="date">Analysis: Tue 14 Jul 2026 · regime-calibrated</span>
     <a class="btn" href="https://shafx-fx.github.io/xauusd-live/xauusd_report.pdf" target="_blank" style="text-decoration: none;">⬇ PDF report</a>
   </div>
@@ -161,39 +160,38 @@
         <span id="fetchNote"></span>
       </div>
       <div id="lvlRead">Price is between <b>support 4,100–4,105</b> and the <b>4,135–4,145 pivot zone</b>, below MA50 (4,132.6) and MA200 (4,171.0) — sellers still control the 15-min structure.</div>
-      <div id="flipAlarm"></div>
     </div>
 
     <div class="card verdict">
       <h3>Intraday bias — three engines</h3>
       <div class="chips">
-        <div class="chip"><span>War news → oil → hike odds → yields: Brent $86, gold flat ~4,010</span><span class="tag t-bear">BEARISH NOW</span></div>
-        <div class="chip"><span>Bonds/Fed: 10Y ~4.56%, real yield ~2.33%, Sept hike ~70%</span><span class="tag t-bear">BEARISH</span></div>
-        <div class="chip"><span>USD: DXY ~101.1, firming ahead of CPI</span><span class="tag t-two">MILD HEADWIND</span></div>
+        <div class="chip"><span>War news → oil → hike odds → yields: haven bid still failing</span><span class="tag t-bear">BEARISH NOW</span></div>
+        <div class="chip"><span>Bonds/Fed: 10Y 4.56% falling post-CPI, Jul hike odds 42%→17%, Sept ~60%</span><span class="tag t-two">EASING POST-CPI</span></div>
+        <div class="chip"><span>USD: DXY ~100.7, −0.5% post-CPI</span><span class="tag t-bull">MILD TAILWIND</span></div>
       </div>
-      <div class="net"><b>Net: gold is trading as a rates asset, not a fear asset.</b> Re-confirmed Jul 13–14: gold fell 2.9% then sat near ~4,010 while Brent broke $86 on the UAE tanker attacks and blockade — the oil spike feeds hike odds, not the haven bid. June CPI (8:30 ET) is the session's swing factor; watch equities for the risk-off flip. Regime monitor below.</div>
+      <div class="net"><b>Net: gold is still trading as a rates asset, not a fear asset.</b> The weekend escalation (strikes + Hormuz re-closure) sent gold below $4,000 while oil surged — and it was today's cooler CPI, not the war news, that lifted it back toward 4,030. Fade escalation-driven pops; rate relief and de-escalation are the bullish headlines. Regime monitor below.</div>
     </div>
 
     <div class="card verdict">
       <h3>⚡ Today's movers — Tue 14 Jul</h3>
       <div class="chips">
-        <div class="chip"><span><b>Jul 14</b> · Iran cruise missiles hit 2 UAE tankers, 1 crew killed — Brent breaks $86</span><span class="tag t-bear">BEARISH VIA YIELDS</span></div>
-        <div class="chip"><span><b>Jul 14</b> · Trump reinstates Hormuz blockade + demands 20% toll on cargoes</span><span class="tag t-bear">YIELDS UP</span></div>
-        <div class="chip"><span><b>Jul 14</b> · June CPI 8:30 ET — exp. 3.9% y/y (from 4.2%), core ~2.9%</span><span class="tag t-two">KEY EVENT</span></div>
-        <div class="chip"><span><b>Jul 13–14</b> · Gold −2.9% then flat ~4,010 — no haven bid on worst escalation yet</span><span class="tag t-bear">REGIME CONFIRMED</span></div>
-        <div class="chip"><span><b>Jul 13</b> · Waller puts a July hike in play; Sept hike odds near 70%</span><span class="tag t-bear">HAWKISH FED</span></div>
+        <div class="chip"><span><b>Jul 14</b> · June CPI 3.5% y/y vs 3.8% exp — yields fall, Jul hike odds 42%→17%</span><span class="tag t-bull">GOLD TAILWIND</span></div>
+        <div class="chip"><span><b>Jul 14</b> · Gold broke under $4,000 in Asia (lowest since Jul 1), rebounding post-CPI</span><span class="tag t-two">TWO-WAY</span></div>
+        <div class="chip"><span><b>Jul 13</b> · Iran re-closes Hormuz; US reinstates naval blockade, floats 20% escort fee</span><span class="tag t-bear">BEARISH VIA YIELDS</span></div>
+        <div class="chip"><span><b>Jul 12</b> · Weekend missile/drone exchanges; Brent +13.7% on the week</span><span class="tag t-bear">REGIME CONFIRMED</span></div>
+        <div class="chip"><span><b>Jul 14</b> · Warsh testimony ahead; Sept hike odds still ~60%</span><span class="tag t-two">WATCH</span></div>
       </div>
     </div>
   </div>
 
   <div class="card panel" style="margin-bottom: 12px; border-left: 4px solid var(--gold);">
     <h2>⚙ Regime monitor — how war news moves gold right now</h2>
-    <div class="sub">Calibrated 9 Jul 2026 against the live tape · re-checked 14 Jul — regime unchanged</div>
-    <p style="font-size: 13px; margin-bottom: 9px;"><b>Current transmission:</b> escalation → oil ↑ → inflation &amp; Fed hike odds ↑ → yields ↑ → <b style="color: var(--red);">gold ↓</b>. Re-confirmed Jul 13: on the biggest escalation of the war (Hormuz closed outright, US bases in five Gulf states hit), gold fell &gt;2% toward ~$4,020 while Sept hike odds rose to ~70% — the rates channel still overpowers the fear channel.</p>
+    <div class="sub">Calibrated 9 Jul 2026 against the live tape · re-checked 14 Jul 2026</div>
+    <p style="font-size: 13px; margin-bottom: 9px;"><b>Current transmission:</b> escalation → oil ↑ → inflation &amp; Fed hike odds ↑ → yields ↑ → <b style="color: var(--red);">gold ↓</b>. Confirmed Jul 8 and again Jul 12–14: weekend strikes plus the Hormuz re-closure sent gold below $4,000 (lowest since Jul 1) while Brent surged ~14% on the week — the third consecutive escalation episode to sell gold. With Sept hike odds still ~60%, the rates channel keeps overpowering the fear channel.</p>
     <table class="fomc">
       <tr><td>War / Hormuz news → gold</td><td>Escalation currently sells gold; de-escalation (Doha progress, strait reopening) lifts it — the inverse of the textbook haven trade.</td><td><span class="mini-tag t-bear">NEGATIVE</span></td></tr>
-      <tr><td>Real yields → gold</td><td>Primary 2026 headwind (10Y TIPS ~2.33%); gold lagged all H1 as hike bets rose. The dominant driver.</td><td><span class="mini-tag t-bear">NEGATIVE · DOMINANT</span></td></tr>
-      <tr><td>DXY → gold</td><td>Standard inverse relationship, mild while DXY sits near ~101 ahead of CPI.</td><td><span class="mini-tag t-two">NEGATIVE · MILD</span></td></tr>
+      <tr><td>Real yields → gold</td><td>Primary 2026 headwind (10Y TIPS ~2.25%, est. from 10Y 4.56%); gold lagged all H1 as hike bets rose. The dominant driver.</td><td><span class="mini-tag t-bear">NEGATIVE · DOMINANT</span></td></tr>
+      <tr><td>DXY → gold</td><td>Standard inverse relationship, mild while DXY sits near 100.7 after the post-CPI dip.</td><td><span class="mini-tag t-two">NEGATIVE · MILD</span></td></tr>
       <tr><td>Central-bank buying → gold</td><td>Steady official bid (+41t in May) cushions dips regardless of regime.</td><td><span class="mini-tag t-bull">POSITIVE · FLOOR</span></td></tr>
       <tr><td>Regime flips back to haven-bid if</td><td>Fed turns dovish / real yields roll over hard / US assets are hit directly / broad equity risk-off forces a fear trade.</td><td><span class="mini-tag t-two">WATCH</span></td></tr>
     </table>
@@ -205,13 +203,8 @@
       <div class="sub">2026 Iran war · Strait of Hormuz crisis · updated 14 Jul 2026 · tags reflect current regime · every item is date-stamped</div>
 
       <div class="geo-item bear">
-        <div class="head"><b>Jul 14 · Iran hits 2 UAE tankers; Trump orders blockade + 20% Hormuz toll</b><span class="mini-tag t-bear">BEARISH VIA YIELDS</span></div>
-        <p>Cruise missiles struck the Al Bahyah and Mombasa B early Tuesday, killing one mariner (ADNOC L&amp;S); US flew a third night of strikes and Trump reinstated the blockade with a 20% toll demand. Brent broke $86, gold held ~4,010. Reasoning: still pricing via yields — but civilian deaths on third-country vessels plus a formal blockade move the tape closer to the risk-off flip triggers; watch equities.</p>
-      </div>
-
-      <div class="geo-item bear">
-        <div class="head"><b>Jul 12–13 · Iran closes Hormuz outright, strikes US bases across the Gulf</b><span class="mini-tag t-bear">BEARISH VIA YIELDS</span></div>
-        <p>Iran fired on a commercial ship Saturday and declared the strait fully closed; its missiles targeted US bases in Kuwait, Bahrain, Jordan, Oman and Qatar (no US casualties reported), and the US struck Iranian air defenses and IRGC boats around the strait. Brent rose ~3% toward $78. Reasoning: the sharpest escalation yet sold gold −2% — oil-led hike odds beat the haven bid again. It also deepens doubt over the interim peace deal signed last month.</p>
+        <div class="head"><b>Jul 12–14 · Weekend strikes; Iran re-closes Hormuz, US reinstates blockade</b><span class="mini-tag t-bear">BEARISH VIA YIELDS</span></div>
+        <p>Missile and drone attacks on both sides over the weekend; Iran announced the strait closed again while the US reinstated a naval blockade of Iranian ports and proposed a 20% fee to guard transiting ships. Gold fell below $4,000 (lowest since Jul 1) as Brent surged ~14% on the week. Reasoning: third straight escalation episode to sell gold — the oil → hike-odds → yields channel keeps beating the haven bid.</p>
       </div>
 
       <div class="geo-item bull">
@@ -226,12 +219,12 @@
 
       <div class="geo-item two">
         <div class="head"><b>Jun 17 pact · Islamabad Memorandum in jeopardy</b><span class="mini-tag t-two">TWO-WAY RISK</span></div>
-        <p>Jun 17 US–Iran MOU set a 60-day window to negotiate a final deal. Doha talks were "going well" (Jul 1) before this week's attacks. Reasoning: in this regime de-escalation is the gold-BULLISH tail (oil and hike odds fall); fresh escalation the bearish one. Both live intraday.</p>
+        <p>Jun 17 US–Iran MOU set a 60-day window to negotiate a final deal. Doha talks were "going well" (Jul 1) before the renewed attacks. Reasoning: in this regime de-escalation is the gold-BULLISH tail (oil and hike odds fall); fresh escalation the bearish one. Both live intraday.</p>
       </div>
 
       <div class="geo-item two">
-        <div class="head"><b>Jul 7 · Khamenei funeral in Qom (reported)</b><span class="mini-tag t-two">UNCERTAINTY</span></div>
-        <p>Al Jazeera liveblog reports the Supreme Leader's body arrived in Qom; succession unclear. Reasoning: leadership vacuum raises miscalculation risk, but could also open the door to a deal — headline-sensitive.</p>
+        <div class="head"><b>Jul 10 · Khamenei buried in Mashhad — succession phase begins</b><span class="mini-tag t-two">UNCERTAINTY</span></div>
+        <p>Succession remains unclear after the Supreme Leader's funeral. Reasoning: leadership vacuum raises miscalculation risk, but could also open the door to a deal — headline-sensitive.</p>
       </div>
 
       <div class="geo-item bull">
@@ -242,19 +235,19 @@
 
     <div class="card panel">
       <h2>🏦 Bond market &amp; Fed</h2>
-      <div class="sub">Yields as of Mon 13 Jul (10Y/2Y last close Fri 10 Jul; TIPS 13 Jul) · Fed chair: Kevin Warsh</div>
+      <div class="sub">Yields as of Tue 14 Jul, post-CPI · Fed chair: Kevin Warsh</div>
       <table class="bonds">
-        <tr><td>Fed funds target</td><td>3.50–3.75%</td><td><span class="mini-tag t-two">HOLD LIKELY JUL (~75%)</span></td></tr>
-        <tr><td>Sept rate-hike odds (CME)</td><td>~70%</td><td><span class="mini-tag t-bear">HIKE RISK RISING</span></td></tr>
-        <tr><td>10Y Treasury</td><td>4.56%</td><td><span class="mini-tag t-bear">BACK UP ON OIL</span></td></tr>
-        <tr><td>2Y Treasury</td><td>4.21%</td><td><span class="mini-tag t-two">POLICY-SENSITIVE</span></td></tr>
+        <tr><td>Fed funds target</td><td>3.50–3.75%</td><td><span class="mini-tag t-two">JUL HIKE ODDS ~17%</span></td></tr>
+        <tr><td>Sept rate-hike odds (CME)</td><td>~60%</td><td><span class="mini-tag t-bear">HIKE RISK LIVE</span></td></tr>
+        <tr><td>10Y Treasury</td><td>4.56%</td><td><span class="mini-tag t-two">−5BP POST-CPI</span></td></tr>
+        <tr><td>2Y Treasury</td><td>4.18%</td><td><span class="mini-tag t-two">−8BP POST-CPI</span></td></tr>
         <tr><td>30Y Treasury</td><td>&gt;5.00%</td><td><span class="mini-tag t-bear">ABOVE KEY 5%</span></td></tr>
-        <tr><td>10Y TIPS (real yield)</td><td>2.33%</td><td><span class="mini-tag t-bear">GOLD HEADWIND</span></td></tr>
-        <tr><td>DXY dollar index</td><td>~101.1</td><td><span class="mini-tag t-two">FIRMING PRE-CPI</span></td></tr>
-        <tr><td>June NFP</td><td>+57K vs 115K exp</td><td><span class="mini-tag t-bull">SOFT LABOR</span></td></tr>
+        <tr><td>10Y TIPS (real yield)</td><td>~2.25% (est.)</td><td><span class="mini-tag t-bear">GOLD HEADWIND</span></td></tr>
+        <tr><td>DXY dollar index</td><td>~100.7</td><td><span class="mini-tag t-bull">−0.5% POST-CPI</span></td></tr>
+        <tr><td>June CPI</td><td>3.5% y/y vs 3.8% exp</td><td><span class="mini-tag t-bull">COOLER THAN EXP</span></td></tr>
       </table>
       <div class="explain">
-        <b>Why this matters:</b> gold pays no yield, so a 2.33% real yield is its direct competitor — the historical gold/real-yield correlation is strongly negative (≈ −0.8). Yields pushed to 4.50% this week partly <i>because</i> the Hormuz oil spike revives inflation-hike risk — meaning the same geopolitical shock feeds both the bullish (haven) and bearish (yield) engines. Since 2022, central-bank buying has kept gold far above what real yields alone would imply: yields steer the intraday direction, but no longer set the floor.
+        <b>Why this matters:</b> gold pays no yield, so a ~2.25% real yield is its direct competitor — the historical gold/real-yield correlation is strongly negative (≈ −0.8). Yields spiked Monday as the Hormuz re-closure revived inflation-hike risk, then fell back Tuesday on the cool June CPI — the same geopolitical shock feeds both the bullish (haven) and bearish (yield) engines. Since 2022, central-bank buying has kept gold far above what real yields alone would imply: yields steer the intraday direction, but no longer set the floor.
       </div>
     </div>
   </div>
@@ -274,10 +267,10 @@
 
   <div class="card panel" style="margin-bottom: 12px;">
     <h2>🏦 Central-bank buying monitor — bank by bank</h2>
-    <div class="sub">Latest WGC aggregate month: May 2026 (published 3 Jul) · newer: PBoC self-reported June via SAFE on 7 Jul · no live feed exists · next WGC release early Aug</div>
+    <div class="sub">Latest reported month: May 2026 (WGC, published 3 Jul) · central banks report monthly with a lag — no live feed exists · next release early Aug</div>
     <table class="fomc">
       <tr><td>Poland (NBP)</td><td>Largest buyer — fourth consecutive month of double-digit purchases; 2026 leader with 64t YTD.</td><td><span class="mini-tag t-bull">+18t MAY</span></td></tr>
-      <tr><td>China (PBoC)</td><td>+10t in May (WGC). Newer: self-reported +14.9t in June (SAFE, 7 Jul) — 20th straight month of buying, biggest add since 2023; holdings ~2,346t, ~40t YTD.</td><td><span class="mini-tag t-bull">+14.9t JUN · SELF-REP.</span></td></tr>
+      <tr><td>China (PBoC)</td><td>Top-three accumulator this year; +25t YTD as reserve diversification continues.</td><td><span class="mini-tag t-bull">+10t</span></td></tr>
       <tr><td>Uzbekistan</td><td>Steady reserve builder from domestic production.</td><td><span class="mini-tag t-bull">+9t</span></td></tr>
       <tr><td>Kazakhstan</td><td>Consistent monthly accumulation.</td><td><span class="mini-tag t-bull">+7t</span></td></tr>
       <tr><td>Singapore (MAS)</td><td>First monthly net purchase since Sep 2025 — fresh demand returning.</td><td><span class="mini-tag t-bull">+4t</span></td></tr>
@@ -299,7 +292,7 @@
         <tr data-min="4135" data-max="4160"><td>PIVOT</td><td>4,135–4,145</td><td>trendline + EMA confluence, MA50 4,132.6</td></tr>
         <tr data-min="4100" data-max="4135"><td class="s">S1</td><td>4,100–4,105</td><td>round-number shelf</td></tr>
         <tr data-min="4075" data-max="4100"><td class="s">S2</td><td>4,075–4,080</td><td>last week's demand</td></tr>
-        <tr data-min="0" data-max="4075"><td class="s">S3</td><td>4,020 / 3,942</td><td>Jul 13 low area / late-June swing low</td></tr>
+        <tr data-min="0" data-max="4075"><td class="s">S3</td><td>4,030 / 3,942</td><td>Jul 8 low (broken Jul 14) / late-June swing low</td></tr>
       </table>
     </div>
 
@@ -327,29 +320,27 @@
 
   <div class="sec-title">Catalyst calendar</div>
   <div class="cal">
-    <div class="ev today"><b>Jul 14 — US CPI (June), 8:30 ET</b><span>Exp. 3.9% y/y from 4.2%, core ~2.9% — key for Sept hike pricing</span></div>
-    <div class="ev"><b>This week — PPI, claims, Philly Fed, UMich</b><span>Inflation-heavy docket keeps every session live</span></div>
-    <div class="ev"><b>Late July — FOMC meeting</b><span>Market ~75% hold; Waller floated a hike Jul 13</span></div>
+    <div class="ev"><b>Jul 8 — FOMC minutes ✓ released</b><span>Hawkish split — see key-points table above</span></div>
+    <div class="ev"><b>Jul 9 — Jobless claims ✓ 215K</b><span>vs 218K exp — labor steady, no dovish push</span></div>
+    <div class="ev today"><b>Jul 14 — US CPI ✓ 3.5% y/y</b><span>vs 3.8% exp — Jul hike odds fell 42%→17%</span></div>
+    <div class="ev"><b>This week — Warsh testimony</b><span>Hawkish-tone risk for Sept pricing</span></div>
     <div class="ev"><b>Rolling — Hormuz headlines</b><span>Strikes / talks: instant repricing</span></div>
   </div>
 
   <div class="foot">
-    <p><b>How this page updates:</b> the price re-fetches automatically every 15 seconds while the page is open, flashing green/red on real ticks; the chart stores one sample per minute (LIVE badge = fresh; STALE = feed unreachable, last known price shown). A 1-minute flip alarm watches the tape while the page is open: an abnormal upward spike (+0.35%/15 min or +0.5%/30 min — a haven-bid signature) triggers an amber warning banner under the price, because it may mean the gold↔war regime is flipping. The alarm detects the signature, not the cause — verify headlines before acting. The written analysis is a snapshot from 14 Jul 2026 — ask Claude to refresh it when the story moves.</p>
+    <p><b>How this page updates:</b> the price re-fetches automatically every 15 seconds while the page is open, flashing green/red on real ticks; the chart stores one sample per minute (LIVE badge = fresh; STALE = feed unreachable, last known price shown). The written analysis is a snapshot from 14 Jul 2026 — ask Claude to refresh it when the story moves.</p>
     <p class="srcs"><b>Sources:</b>
       <a href="https://www.npr.org/2026/07/07/g-s1-132265/tanker-attack-strait-of-hormuz" target="_blank">NPR</a>
       <a href="https://www.aljazeera.com/news/liveblog/2026/7/7/iran-war-live-khameneis-body-arrives-in-qom-hamas-cedes-gaza-governance" target="_blank">Al Jazeera</a>
       <a href="https://tradingeconomics.com/united-states/government-bond-yield" target="_blank">TradingEconomics</a>
-      <a href="https://www.cnbc.com/amp/2026/07/07/us-treasury-yields-investors-await-trade-deficit-data-.html" target="_blank">CNBC</a>
+      <a href="https://www.cnbc.com/2026/07/14/treasury-yields-rise-as-fed-rate-hike-expectations-grow.html" target="_blank">CNBC yields</a>
       <a href="https://www.cnbc.com/2026/07/08/fed-minutes-june-2026-.html" target="_blank">Fed minutes</a>
-      <a href="https://www.vantagemarkets.com/market-analysis/xauusd-gold-price-analysis-july-6-2026/" target="_blank">Vantage</a>
+      <a href="https://finance.yahoo.com/personal-finance/investing/article/gold-prices-today-tuesday-july-14-2026-iran-crisis-drives-prices-lower-120548701.html" target="_blank">Yahoo Finance</a>
+      <a href="https://www.fxleaders.com/news/2026/07/14/gold-price-analysis-4015-as-renewed-us-iran-strikes-and-strait-closure-create-a-safe-haven-paradox/" target="_blank">FX Leaders</a>
       <a href="https://www.litefinance.org/blog/analysts-opinions/gold-price-prediction-forecast/daily-and-weekly/" target="_blank">LiteFinance</a>
       <a href="https://tradingeconomics.com/united-states/10-year-tips-yield" target="_blank">10Y TIPS</a>
       <a href="https://www.gold.org/goldhub/gold-focus/2026/07/central-bank-gold-statistics-central-banks-remain-committed-gold" target="_blank">WGC</a>
       <a href="https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis" target="_blank">Hormuz crisis</a>
-      <a href="https://www.cnbc.com/2026/07/13/us-iran-war-hormuz-oil-trump.html" target="_blank">CNBC Jul 13</a>
-      <a href="https://www.cnbc.com/2026/07/14/oil-prices-today-brent-wti-hormuz-trump-toll-iran.html" target="_blank">CNBC oil Jul 14</a>
-      <a href="https://www.bloomberg.com/news/articles/2026-07-13/gold-holds-decline-on-renewed-hormuz-blockade-and-hawkish-fed" target="_blank">Bloomberg gold</a>
-      <a href="https://www.advisorperspectives.com/dshort/updates/2026/07/10/treasury-yields-snapshot-july-10-2026" target="_blank">Yields snapshot</a>
       <a href="https://gold-api.com" target="_blank">gold-api.com (live feed)</a>
     </p>
     <p>Educational analysis, not financial advice. Figures as reported by cited sources; verify before trading.</p>
@@ -451,36 +442,6 @@
              : "above MA200 (4,171.0) — buyers control the 15-min structure";
     $("lvlRead").innerHTML = "Live read: price in zone <b>" + msg + "</b>, " + side + ".";
   }
-  /* ---------- 1-min regime flip alarm (haven-bid spike detector) ---------- */
-  function checkFlip(h) {
-    var el = $("flipAlarm");
-    if (!el || !h || h.length < 2) return;
-    var now = h[h.length - 1];
-    function sampleAt(mins) {
-      var target = now.t - mins * 60000;
-      for (var i = h.length - 1; i >= 0; i--) {
-        if (Math.abs(h[i].t - target) <= 5 * 60000) return h[i];
-        if (h[i].t < target - 5 * 60000) break;
-      }
-      return null;
-    }
-    var msg = "";
-    var s30 = sampleAt(30);
-    if (s30) {
-      var c30 = (now.p - s30.p) / s30.p * 100;
-      if (c30 >= 0.5) msg = "⚠ FLIP ALARM: gold +" + c30.toFixed(2) + "% in ~30 min — haven-bid signature. If this follows an escalation headline, the regime may be flipping: do NOT fade the spike on the old logic. Ask Claude to re-verify and refresh this page.";
-    }
-    if (!msg) {
-      var s15 = sampleAt(15);
-      if (s15) {
-        var c15 = (now.p - s15.p) / s15.p * 100;
-        if (c15 >= 0.35) msg = "⚠ FLIP ALARM: gold +" + c15.toFixed(2) + "% in ~15 min — abnormal spike. Check war headlines before trading the old (escalation = bearish) regime.";
-      }
-    }
-    if (msg) { el.textContent = msg; el.style.display = "block"; }
-    else { el.style.display = "none"; }
-  }
-
   function setBadge(live, when, note) {
     var b = $("srcBadge");
     b.textContent = live ? "LIVE" : "STALE";
@@ -532,8 +493,7 @@
       }
       setDelta(got.p); setLevels(got.p);
       setBadge(true, got.t || Date.now());
-      var h2 = pushHist(got.p, got.t || Date.now());
-      drawChart(h2); checkFlip(h2);
+      drawChart(pushHist(got.p, got.t || Date.now()));
     }).catch(function (e) {
       setBadge(false, Date.now(), "feed unreachable — showing last known");
     }).finally(function () {
@@ -551,7 +511,7 @@
   /* ---------- boot ---------- */
   var hist = loadHist();
   if (!hist.length) hist = pushHist(BASELINE.p, BASELINE.t);
-  setDelta(BASELINE.p); setLevels(BASELINE.p); drawChart(hist); checkFlip(hist);
+  setDelta(BASELINE.p); setLevels(BASELINE.p); drawChart(hist);
   $("btnNow").addEventListener("click", function () { refresh(true); });
   setInterval(tick, 1000);
   refresh(false); // fetch immediately on open
