@@ -66,6 +66,7 @@
   .btn:hover { filter: brightness(.97); }
   #lvlRead { margin-top: 10px; font-size: 13.8px; color: var(--ink-2); }
   #lvlRead b { color: var(--ink); }
+  #flipAlarm { display: none; margin-top: 10px; background: var(--amber-soft); border: 1px solid #e8d9ae; border-radius: 9px; padding: 9px 12px; font-size: 13.5px; color: var(--amber); font-weight: 700; }
 
   /* verdict */
   .verdict h3 { font-size: 13.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-2); margin-bottom: 10px; font-weight: 800; }
@@ -160,6 +161,7 @@
         <span id="fetchNote"></span>
       </div>
       <div id="lvlRead">Price is between <b>support 4,100–4,105</b> and the <b>4,135–4,145 pivot zone</b>, below MA50 (4,132.6) and MA200 (4,171.0) — sellers still control the 15-min structure.</div>
+      <div id="flipAlarm"></div>
     </div>
 
     <div class="card verdict">
@@ -332,7 +334,7 @@
   </div>
 
   <div class="foot">
-    <p><b>How this page updates:</b> the price re-fetches automatically every 15 seconds while the page is open, flashing green/red on real ticks; the chart stores one sample per minute (LIVE badge = fresh; STALE = feed unreachable, last known price shown). The written analysis is a snapshot from 14 Jul 2026 — ask Claude to refresh it when the story moves.</p>
+    <p><b>How this page updates:</b> the price re-fetches automatically every 15 seconds while the page is open, flashing green/red on real ticks; the chart stores one sample per minute (LIVE badge = fresh; STALE = feed unreachable, last known price shown). A 1-minute flip alarm watches the tape while the page is open: an abnormal upward spike (+0.35%/15 min or +0.5%/30 min — a haven-bid signature) triggers an amber warning banner under the price, because it may mean the gold↔war regime is flipping. The alarm detects the signature, not the cause — verify headlines before acting. The written analysis is a snapshot from 14 Jul 2026 — ask Claude to refresh it when the story moves.</p>
     <p class="srcs"><b>Sources:</b>
       <a href="https://www.npr.org/2026/07/07/g-s1-132265/tanker-attack-strait-of-hormuz" target="_blank">NPR</a>
       <a href="https://www.aljazeera.com/news/liveblog/2026/7/7/iran-war-live-khameneis-body-arrives-in-qom-hamas-cedes-gaza-governance" target="_blank">Al Jazeera</a>
@@ -449,6 +451,36 @@
              : "above MA200 (4,171.0) — buyers control the 15-min structure";
     $("lvlRead").innerHTML = "Live read: price in zone <b>" + msg + "</b>, " + side + ".";
   }
+  /* ---------- 1-min regime flip alarm (haven-bid spike detector) ---------- */
+  function checkFlip(h) {
+    var el = $("flipAlarm");
+    if (!el || !h || h.length < 2) return;
+    var now = h[h.length - 1];
+    function sampleAt(mins) {
+      var target = now.t - mins * 60000;
+      for (var i = h.length - 1; i >= 0; i--) {
+        if (Math.abs(h[i].t - target) <= 5 * 60000) return h[i];
+        if (h[i].t < target - 5 * 60000) break;
+      }
+      return null;
+    }
+    var msg = "";
+    var s30 = sampleAt(30);
+    if (s30) {
+      var c30 = (now.p - s30.p) / s30.p * 100;
+      if (c30 >= 0.5) msg = "⚠ FLIP ALARM: gold +" + c30.toFixed(2) + "% in ~30 min — haven-bid signature. If this follows an escalation headline, the regime may be flipping: do NOT fade the spike on the old logic. Ask Claude to re-verify and refresh this page.";
+    }
+    if (!msg) {
+      var s15 = sampleAt(15);
+      if (s15) {
+        var c15 = (now.p - s15.p) / s15.p * 100;
+        if (c15 >= 0.35) msg = "⚠ FLIP ALARM: gold +" + c15.toFixed(2) + "% in ~15 min — abnormal spike. Check war headlines before trading the old (escalation = bearish) regime.";
+      }
+    }
+    if (msg) { el.textContent = msg; el.style.display = "block"; }
+    else { el.style.display = "none"; }
+  }
+
   function setBadge(live, when, note) {
     var b = $("srcBadge");
     b.textContent = live ? "LIVE" : "STALE";
@@ -500,7 +532,8 @@
       }
       setDelta(got.p); setLevels(got.p);
       setBadge(true, got.t || Date.now());
-      drawChart(pushHist(got.p, got.t || Date.now()));
+      var h2 = pushHist(got.p, got.t || Date.now());
+      drawChart(h2); checkFlip(h2);
     }).catch(function (e) {
       setBadge(false, Date.now(), "feed unreachable — showing last known");
     }).finally(function () {
@@ -518,7 +551,7 @@
   /* ---------- boot ---------- */
   var hist = loadHist();
   if (!hist.length) hist = pushHist(BASELINE.p, BASELINE.t);
-  setDelta(BASELINE.p); setLevels(BASELINE.p); drawChart(hist);
+  setDelta(BASELINE.p); setLevels(BASELINE.p); drawChart(hist); checkFlip(hist);
   $("btnNow").addEventListener("click", function () { refresh(true); });
   setInterval(tick, 1000);
   refresh(false); // fetch immediately on open
