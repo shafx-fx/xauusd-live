@@ -137,7 +137,7 @@ table.fomc td:last-child { text-align: right; white-space: nowrap; }
 <div class="wrap">
 
 <div class="top">
-<h1><span>XAUUSD</span> Live Analysis — Geopolitics × Bond Market</h1>
+<h1><span>XAUUSD</span> <span id="dirTitle" style="font-size: 21px; vertical-align: 2px;">•</span> Live Analysis — Geopolitics × Bond Market</h1>
 <span class="badge-event">⚠ FOMC OUT: HOLD 3.50–3.75% — UNANIMOUS, zero dissents vs two expected (dovish surprise) · Warsh presser 14:30 ET</span>
 <span class="date">Analysis: Wed 29 Jul 2026 · regime-calibrated</span>
 <a class="btn" href="https://shafx-fx.github.io/xauusd-live/xauusd_report.pdf" target="_blank" style="text-decoration: none;">⬇ PDF report</a>
@@ -576,6 +576,11 @@ function setDelta(p) {
 var d = p - REF_PRICE, pc = (d / REF_PRICE) * 100, el = $("pxDelta");
 el.textContent = (d >= 0 ? "▲ +" : "▼ ") + d.toFixed(2) + " (" + (d >= 0 ? "+" : "") + pc.toFixed(2) + "%)";
 el.className = d > 0.5 ? "up" : d < -0.5 ? "down" : "flat";
+var dir = d > 0.5 ? "up" : d < -0.5 ? "down" : "flat";
+var glyph = dir === "up" ? "▲" : dir === "down" ? "▼" : "•";
+var dt = $("dirTitle");
+if (dt) { dt.textContent = glyph; dt.style.color = dir === "up" ? "#17784a" : dir === "down" ? "#b23a2f" : "#5a6478"; }
+try { document.title = glyph + " XAUUSD " + fmt(p) + " — Live Analysis"; } catch (e) {}
 }
 function setLevels(p) {
 var rows = document.querySelectorAll("#lvlTable tr"), msg = "";
