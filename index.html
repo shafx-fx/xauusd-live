@@ -143,6 +143,8 @@ table.fomc td:last-child { text-align: right; white-space: nowrap; }
 <a class="btn" href="https://shafx-fx.github.io/xauusd-live/xauusd_report.pdf" target="_blank" style="text-decoration: none;">⬇ PDF report</a>
 </div>
 
+<div id="engHeadline" style="margin: 0 0 12px; padding: 10px 16px; border-radius: 10px; background: var(--gold-soft); border: 1px solid #e9dcb2; font-size: 15px; font-weight: 700; color: var(--ink);">🤖 AI ENGINE — warming up: first live conclusion arrives with the next price tick…</div>
+
 <div class="hero">
 <div class="card price-card">
 <div class="price-row">
@@ -669,30 +671,45 @@ if (!cur) cur = { lo: 0, hi: 99999, label: "off-map" };
 var sup = cur.lo > 100 ? cur.lo : null, res = cur.hi < 90000 ? cur.hi : null;
 var dSup = sup ? p - sup : 1e9, dRes = res ? res - p : 1e9;
 var sessW = si[0].indexOf("LONDON + NEW YORK") > -1 ? 3 : (si[0] === "LONDON" || si[0] === "NEW YORK") ? 2 : 1;
-var out, conf;
+var supTxt = sup ? fmtn(sup) : "the ladder floor";
+var resTxt = res ? fmtn(res) : "the ladder top";
+var out, conf, stance;
 if (closed) {
+stance = "CLOSED";
 out = "Market closed — nothing to do live. Use the pause to mark the level ladder for Monday's Asia open; gaps are common after headline weekends.";
 conf = "—";
-} else if (dSup < 12 && momTxt === "rising") {
-out = "Long-side read: price is holding just above " + fmtn(sup) + " support with rising 5-min momentum" + (ENGINE.lean.indexOf("dovish") > -1 ? " and a dovish daily lean" : "") + ". Continuation room toward " + (res ? fmtn(res) : "the next zone") + "; the read is wrong on a firm break below " + fmtn(sup - 8) + ".";
+} else if (sup && dSup < 12 && momTxt === "rising") {
+stance = "WATCH LONG";
+out = "Long-side read: price is holding just above " + supTxt + " support with rising 5-min momentum" + (ENGINE.lean.indexOf("dovish") > -1 ? " and a dovish daily lean" : "") + ". Continuation room toward " + resTxt + "; the read is wrong on a firm break below " + fmtn(sup - 8) + ".";
 conf = sessW >= 2 ? "MEDIUM" : "LOW";
-} else if (dRes < 12 && momTxt === "falling") {
-out = "Fade-zone read: price is rejecting " + fmtn(res) + " resistance with falling momentum" + (ENGINE.regime === "RATES" ? " — consistent with the rates-regime playbook (sell pops)" : "") + ". Room toward " + fmtn(sup) + "; the read is wrong on a sustained hold above " + fmtn(res + 8) + ".";
+} else if (res && dRes < 12 && momTxt === "falling") {
+stance = "WATCH FADE";
+out = "Fade-zone read: price is rejecting " + resTxt + " resistance with falling momentum" + (ENGINE.regime === "RATES" ? " — consistent with the rates-regime playbook (sell pops)" : "") + ". Room toward " + supTxt + "; the read is wrong on a sustained hold above " + fmtn(res + 8) + ".";
 conf = sessW >= 2 ? "MEDIUM" : "LOW";
 } else if (momTxt === "flat" || (dSup >= 12 && dRes >= 12)) {
-out = "No edge mid-range: price sits between " + fmtn(sup) + " and " + fmtn(res) + " with " + momTxt + " momentum. Mid-zone entries carry the worst risk/reward — the information arrives at the boundaries, so wait for a test of either level.";
+stance = "WAIT";
+out = "No edge mid-range: price sits between " + supTxt + " and " + resTxt + " with " + momTxt + " momentum. Mid-zone entries carry the worst risk/reward — the information arrives at the boundaries, so wait for a test of either level.";
 conf = "LOW";
 } else if (momTxt === "rising") {
-out = "Momentum drifting higher toward " + fmtn(res) + " resistance. The reaction at that level is the signal — chasing mid-move is low quality. Acceptance above it targets the next zone; rejection is the fade.";
+stance = "WAIT";
+out = "Momentum drifting higher toward " + resTxt + " resistance. The reaction at that level is the signal — chasing mid-move is low quality. Acceptance above it targets the next zone; rejection is the fade.";
 conf = "LOW";
 } else {
-out = "Momentum drifting lower toward " + fmtn(sup) + " support. Watch the level, not the move: a defended bounce and a clean break are both tradeable — mid-air is not.";
+stance = "WAIT";
+out = "Momentum drifting lower toward " + supTxt + " support. Watch the level, not the move: a defended bounce and a clean break are both tradeable — mid-air is not.";
 conf = "LOW";
 }
 if (!closed && sessW === 1) out += " Caution: low-liquidity session — moves fade often here; treat any read at half conviction.";
 $("engCond").innerHTML = "<b>" + fmt(p) + "</b> · " + momTxt + " (5-min) · zone " + cur.label + " · " + si[0];
 $("engSuggestion").innerHTML = "<b>Engine read — " + conf + " confidence:</b> " + out;
 $("engMeta").textContent = "Inputs: live price + 5-min momentum · key-level ladder · session liquidity · daily regime (" + ENGINE.regime + ", " + ENGINE.lean + ", set " + ENGINE.updated + "). Re-evaluates on every 15s tick.";
+var hl = $("engHeadline");
+if (hl) {
+var firstLine = out.split("—")[0].split(".")[0];
+hl.innerHTML = "🤖 <b>AI ENGINE CONCLUSION: " + stance + "</b> · " + conf + " confidence · " + firstLine + " · " + fmt(p) + " · " + si[0] + " session <span style='font-weight:500; color: var(--ink-2); font-size: 12px;'>· educational read, not trade advice · re-evaluates every 15s</span>";
+hl.style.background = stance === "WATCH LONG" ? "var(--green-soft)" : stance === "WATCH FADE" ? "var(--red-soft)" : "var(--gold-soft)";
+hl.style.borderColor = stance === "WATCH LONG" ? "#bfe0cc" : stance === "WATCH FADE" ? "#ecc9c4" : "#e9dcb2";
+}
 }
 
 /* ---------- trading session (live, UTC-based, approximate boundaries) ---------- */
