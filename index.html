@@ -43,8 +43,8 @@ a:hover { text-decoration: underline; }
 .badge-event { background: var(--amber-soft); color: var(--amber); border: 1px solid #e8d9ae; border-radius: 20px; padding: 4px 13px; font-size: 13px; font-weight: 700; }
 
 /* hero */
-.hero { display: grid; grid-template-columns: 1.1fr 1fr 0.95fr; gap: 12px; margin-bottom: 12px; }
-@media (max-width: 1100px) { .hero { grid-template-columns: 1fr 1fr; } }
+.hero { display: grid; grid-template-columns: 1fr 0.95fr 0.9fr 0.9fr; gap: 12px; margin-bottom: 12px; }
+@media (max-width: 1280px) { .hero { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 760px) { .hero { grid-template-columns: 1fr; } }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
 .price-card { display: flex; flex-direction: column; justify-content: center; }
@@ -185,6 +185,16 @@ Active session: <span class="src-badge" id="sessBadge" style="background: var(--
 <div class="chip"><span><b>Jul 29</b> · US–Iran attacks reignited overnight — the 13-day pause breaks; Qatar talks still the off-ramp</span><span class="tag t-bear">TRUCE BROKEN</span></div>
 <div class="chip"><span><b>Jul 29</b> · Gold pinned near $4,020 into the decision; dip-buyers defending the $4,000 handle</span><span class="tag t-two">COILED</span></div>
 </div>
+</div>
+
+<div class="card verdict">
+<h3>🤖 Live suggestion engine</h3>
+<div class="chips">
+<div class="chip"><span id="engCond">reading live conditions…</span></div>
+</div>
+<div class="net" id="engSuggestion" style="font-size: 13.8px;">warming up — first read arrives with the next price tick…</div>
+<div style="margin-top: 8px; font-size: 12.6px; color: var(--ink-2);" id="engMeta"></div>
+<div style="margin-top: 8px; font-size: 11.8px; color: var(--ink-2);"><b>Rule-based educational engine</b> — combines live price &amp; 5-min momentum, key levels, active session and the daily regime state. Deterministic rules, no prediction. Not trade advice; CFDs and leveraged products carry a high risk of loss.</div>
 </div>
 </div>
 
@@ -631,6 +641,7 @@ el.classList.add(got.p > prev ? "flash-up" : "flash-down");
 setDelta(got.p); setLevels(got.p);
 setBadge(true, got.t || Date.now());
 drawChart(pushHist(got.p, got.t || Date.now()));
+runEngine(got.p);
 }).catch(function (e) {
 setBadge(false, Date.now(), "feed unreachable — showing last known");
 }).finally(function () {
@@ -638,6 +649,52 @@ busy = false;
 nextAt = Date.now() + PERIOD;
 });
 }
+/* ---------- live suggestion engine (deterministic rules, educational) ---------- */
+var ENGINE = { regime: "RATES", lean: "dovish lean post-FOMC", updated: "29 Jul" };
+var fmtn = function (n) { return Math.round(n).toLocaleString("en-US"); };
+function runEngine(p) {
+if (!$("engSuggestion")) return;
+var si = sessionInfo();
+var closed = si[0] === "MARKET CLOSED";
+var h = loadHist(), pOld = null, now = Date.now();
+for (var i = h.length - 1; i >= 0; i--) { if (now - h[i].t >= 5 * 60000) { pOld = h[i].p; break; } }
+var mom = pOld ? (p - pOld) / pOld * 100 : 0;
+var momTxt = mom > 0.05 ? "rising" : mom < -0.05 ? "falling" : "flat";
+var cur = null;
+document.querySelectorAll("#lvlTable tr").forEach(function (r) {
+var lo = parseFloat(r.dataset.min), hi = parseFloat(r.dataset.max);
+if (p >= lo && p < hi) cur = { lo: lo, hi: hi, label: (r.cells[0].textContent + " " + r.cells[1].textContent).trim() };
+});
+if (!cur) cur = { lo: 0, hi: 99999, label: "off-map" };
+var sup = cur.lo > 100 ? cur.lo : null, res = cur.hi < 90000 ? cur.hi : null;
+var dSup = sup ? p - sup : 1e9, dRes = res ? res - p : 1e9;
+var sessW = si[0].indexOf("LONDON + NEW YORK") > -1 ? 3 : (si[0] === "LONDON" || si[0] === "NEW YORK") ? 2 : 1;
+var out, conf;
+if (closed) {
+out = "Market closed — nothing to do live. Use the pause to mark the level ladder for Monday's Asia open; gaps are common after headline weekends.";
+conf = "—";
+} else if (dSup < 12 && momTxt === "rising") {
+out = "Long-side read: price is holding just above " + fmtn(sup) + " support with rising 5-min momentum" + (ENGINE.lean.indexOf("dovish") > -1 ? " and a dovish daily lean" : "") + ". Continuation room toward " + (res ? fmtn(res) : "the next zone") + "; the read is wrong on a firm break below " + fmtn(sup - 8) + ".";
+conf = sessW >= 2 ? "MEDIUM" : "LOW";
+} else if (dRes < 12 && momTxt === "falling") {
+out = "Fade-zone read: price is rejecting " + fmtn(res) + " resistance with falling momentum" + (ENGINE.regime === "RATES" ? " — consistent with the rates-regime playbook (sell pops)" : "") + ". Room toward " + fmtn(sup) + "; the read is wrong on a sustained hold above " + fmtn(res + 8) + ".";
+conf = sessW >= 2 ? "MEDIUM" : "LOW";
+} else if (momTxt === "flat" || (dSup >= 12 && dRes >= 12)) {
+out = "No edge mid-range: price sits between " + fmtn(sup) + " and " + fmtn(res) + " with " + momTxt + " momentum. Mid-zone entries carry the worst risk/reward — the information arrives at the boundaries, so wait for a test of either level.";
+conf = "LOW";
+} else if (momTxt === "rising") {
+out = "Momentum drifting higher toward " + fmtn(res) + " resistance. The reaction at that level is the signal — chasing mid-move is low quality. Acceptance above it targets the next zone; rejection is the fade.";
+conf = "LOW";
+} else {
+out = "Momentum drifting lower toward " + fmtn(sup) + " support. Watch the level, not the move: a defended bounce and a clean break are both tradeable — mid-air is not.";
+conf = "LOW";
+}
+if (!closed && sessW === 1) out += " Caution: low-liquidity session — moves fade often here; treat any read at half conviction.";
+$("engCond").innerHTML = "<b>" + fmt(p) + "</b> · " + momTxt + " (5-min) · zone " + cur.label + " · " + si[0];
+$("engSuggestion").innerHTML = "<b>Engine read — " + conf + " confidence:</b> " + out;
+$("engMeta").textContent = "Inputs: live price + 5-min momentum · key-level ladder · session liquidity · daily regime (" + ENGINE.regime + ", " + ENGINE.lean + ", set " + ENGINE.updated + "). Re-evaluates on every 15s tick.";
+}
+
 /* ---------- trading session (live, UTC-based, approximate boundaries) ---------- */
 function sessionInfo() {
 var now = new Date();
@@ -672,6 +729,7 @@ if (left <= 0) refresh(false);
 var hist = loadHist();
 if (!hist.length) hist = pushHist(BASELINE.p, BASELINE.t);
 setDelta(BASELINE.p); setLevels(BASELINE.p); drawChart(hist);
+runEngine(BASELINE.p);
 $("btnNow").addEventListener("click", function () { refresh(true); });
 setInterval(tick, 1000);
 refresh(false); // fetch immediately on open
